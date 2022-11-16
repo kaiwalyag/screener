@@ -36,3 +36,26 @@
     transform: rotate(360deg);
   }
 }
+
+.mainContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.container2 {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.2rem;
+  width: 300px;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem;
+  font-weight: 500;
+}
