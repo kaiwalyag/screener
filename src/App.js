@@ -19,6 +19,7 @@ import {
 } from "@mui/material";
 
 import { styled, createTheme, ThemeProvider } from "@mui/system";
+import Stats from './components/Stats';
 
 // Create a theme instance.
 
@@ -122,6 +123,7 @@ function App() {
     <Container component="main" maxWidth="sm">
       <CssBaseline />
       <div>
+        <Stats></Stats>
         <Grid container spacing={2}>
           <Grid item xs={6} md={8}>
             <Typography component="h1" variant="h5">
