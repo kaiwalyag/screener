@@ -19,7 +19,7 @@ import {
 } from "@mui/material";
 
 import { styled, createTheme, ThemeProvider } from "@mui/system";
-import Stats from './components/Stats';
+import Stats from "./components/Stats";
 
 // Create a theme instance.
 
@@ -64,10 +64,6 @@ const company = {
   EVToRevenue: "2.869",
   EVToEBITDA: "24.94",
   Beta: "0.877",
-  "52WeekHigh": "144.13",
-  "52WeekLow": "109.15",
-  "50DayMovingAverage": "128.1",
-  "200DayMovingAverage": "131.68",
   SharesOutstanding: "896320000",
   DividendDate: "2022-12-10",
   ExDividendDate: "2022-11-09",
@@ -120,10 +116,10 @@ function App() {
   //const classes = useStyles();
 
   return (
-    <Container component="main" maxWidth="sm">
+    <Container component="main">
       <CssBaseline />
       <div>
-        <Stats></Stats>
+        <Stats company={company}></Stats>
         <Grid container spacing={2}>
           <Grid item xs={6} md={8}>
             <Typography component="h1" variant="h5">

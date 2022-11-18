@@ -1,77 +1,102 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import { styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import { KeyboardArrowUp, KeyboardArrowDown } from "@mui/icons-material";
+import StatsCard from "./StatsCard";
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-  width: '150px'
-}));
-
-const Value = styled(Typography)(({ theme }) => ({
-  fontSize: '24px',
-  fontWeight: "500"
-}));
-
-const Change = styled(Typography)(({ theme }) => ({
-  fontSize: '12px',
-  color: "green"
-}));
-
-const ChangeDivStyle = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  flexWrap: "wrap"
+const StatsBoxStyle = {
+  marginTop: '10px'  
 };
 
-export default function Stats() {
+const flexContainer = {
+  /* We first create a flex layout context */
+  margin: "0px",
+  padding: "0px",
+  display: "flex",
+  flexWrap: "wrap",
+  flexDirection: "row",
+  justifyContent: "space-around",
+  listStyle: "none",
+};
+
+const flexItem = {
+  padding: "5px",
+  marginTop: "10px",
+};
+
+function convertToCurrency(labelValue) {
+  // Nine Zeroes for Billions
+  return Math.abs(Number(labelValue)) >= 1.0e9
+    ? (Math.abs(Number(labelValue)) / 1.0e9).toFixed(2) + " B"
+    : // Six Zeroes for Millions
+    Math.abs(Number(labelValue)) >= 1.0e6
+    ? (Math.abs(Number(labelValue)) / 1.0e6).toFixed(2) + " M"
+    : // Three Zeroes for Thousands
+    Math.abs(Number(labelValue)) >= 1.0e3
+    ? (Math.abs(Number(labelValue)) / 1.0e3).toFixed(2) + " K"
+    : Math.abs(Number(labelValue));
+}
+
+export default function Stats(props) {
   return (
     <div>
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={4}>
-            <Item>
-              <Typography color="text.secondary">Revenue</Typography>
-              <Value> 123.35 BN </Value>
-              <div style={ChangeDivStyle}>
-                <KeyboardArrowUp sx={{ color: "green" }} />
-                <Change>10.25% </Change>
-              </div>
-            </Item>
-          </Grid>
-          <Grid item xs={4}>
-            <Item>
-              <Typography variant="h5" sx={{ fontSize: 24 }} component="div">
-                123 BN
-              </Typography>
-              <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                Revenue
-              </Typography>
-            </Item>
-          </Grid>
-          <Grid item xs={4}>
-            <Item>
-              <Typography variant="h5" sx={{ fontSize: 24 }} component="div">
-                123 BN
-              </Typography>
-              <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                Revenue
-              </Typography>
-            </Item>
-          </Grid>
+      <Grid
+        container
+        spacing={{ xs: 2, md: 2, md: 2, lg:2  }}
+        columns={{ xs: 4, sm: 8, md: 12, lg:12 }}
+        style={StatsBoxStyle}
+      >
+        <Grid item xs={2}>
+          <StatsCard
+            title={"Market Cap"}
+            value={convertToCurrency(props.company.MarketCapitalization)}
+            change={props.company.QuarterlyRevenueGrowthYOY}
+          />
         </Grid>
-      </Box>
-      
+        <Grid item xs={2}>
+          <StatsCard
+            title={"Revenue"}
+            value={convertToCurrency(props.company.RevenueTTM)}
+            change={props.company.QuarterlyRevenueGrowthYOY}
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <StatsCard
+            title={"Gross Profit (TTM)"}
+            value={convertToCurrency(props.company.GrossProfitTTM)}
+            change={props.company.QuarterlyEarningsGrowthYOY}
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <StatsCard
+            title={"EBITDA"}
+            value={convertToCurrency(props.company.EBITDA)}
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <StatsCard
+            title={"PE Ratio"}
+            value={convertToCurrency(props.company.PERatio)}
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <StatsCard
+            title={"Price To Book Ratio"}
+            value={convertToCurrency(props.company.PriceToBookRatio)}
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <StatsCard
+            title={"EBITDA"}
+            value={convertToCurrency(props.company.EBITDA)}
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <StatsCard
+            title={"Return On Equity"}
+            value={convertToCurrency(props.company.ReturnOnEquityTTM)}
+          />
+        </Grid>
+      </Grid>
     </div>
   );
 }

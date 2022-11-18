@@ -1,11 +1,8 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
 import { KeyboardArrowUp, KeyboardArrowDown } from "@mui/icons-material";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -14,39 +11,37 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(1),
   textAlign: "center",
   color: theme.palette.text.secondary,
-  width: '150px'
+  width: "170px",
 }));
 
 const Value = styled(Typography)(({ theme }) => ({
-  fontSize: '24px',
-  fontWeight: "500"
+  fontSize: "24px",
+  fontWeight: "500",
 }));
 
 const Change = styled(Typography)(({ theme }) => ({
-  fontSize: '12px',
-  color: "green"
+  fontSize: "12px",
+  color: "green",
 }));
 
 const ChangeDivStyle = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  flexWrap: "wrap"
+  flexWrap: "wrap",
 };
 
-export default function StatsCard() {
+export default function StatsCard(props) {
   return (
     <div>
-      <Box sx={{ flexGrow: 1 }}>
-        <Item>
-          <Typography color="text.secondary">Revenue</Typography>
-          <Value> 123.35 BN </Value>
-          <div style={ChangeDivStyle}>
-            <KeyboardArrowUp sx={{ color: "green" }} />
-            <Change>10.25% </Change>
-          </div>
-        </Item>
-      </Box>      
+      <Item>
+        <Typography color="text.secondary">{props.title}</Typography>
+        <Value> {props.value}</Value>
+        <div style={ChangeDivStyle}>
+          <KeyboardArrowUp sx={{ color: "green" }} />
+          <Change>10.23% </Change>
+        </div>
+      </Item>
     </div>
   );
 }
