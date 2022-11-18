@@ -1,26 +1,9 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import StatsCard from "./StatsCard";
 
 const StatsBoxStyle = {
   marginTop: '10px'  
-};
-
-const flexContainer = {
-  /* We first create a flex layout context */
-  margin: "0px",
-  padding: "0px",
-  display: "flex",
-  flexWrap: "wrap",
-  flexDirection: "row",
-  justifyContent: "space-around",
-  listStyle: "none",
-};
-
-const flexItem = {
-  padding: "5px",
-  marginTop: "10px",
 };
 
 function convertToCurrency(labelValue) {

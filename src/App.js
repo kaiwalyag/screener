@@ -116,91 +116,23 @@ function App() {
   //const classes = useStyles();
 
   return (
-    <Container component="main">
+    <Container component="main" >
       <CssBaseline />
       <div>
-        <Stats company={company}></Stats>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} sx={{ marginTop: '1rem', marginBottom: '1rem'}}>
           <Grid item xs={6} md={8}>
             <Typography component="h1" variant="h5">
-              {company.Name}
+              {company.Name} ({company.Symbol})
             </Typography>
           </Grid>
-          <Grid item xs={6} md={4}>
-            <Typography component="h1" variant="h5">
-              {company.Symbol}
-            </Typography>
-          </Grid>
-          <Grid item xs={6} md={4}>
-            <Typography component="h1" variant="h5">
+          <Grid item xs={6} md={4} sx={{ display: 'none' }}>
+            <Typography component="h5" variant="h5">
               {company.Exchange}
             </Typography>
           </Grid>
         </Grid>
         <Divider />
-        <div>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <Typography>Sector:</Typography>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography>{company.Sector}</Typography>
-            </Grid>
-
-            <Grid item xs={12} sm={6}>
-              <Typography>Market Capitalization:</Typography>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography>
-                {convertToCurrency(company.MarketCapitalization)}
-              </Typography>
-            </Grid>
-
-            <Grid item xs={12} sm={6}>
-              <Typography>Revenue TTM:</Typography>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography>{convertToCurrency(company.RevenueTTM)}</Typography>
-            </Grid>
-
-            <Grid item xs={12} sm={6}>
-              <Typography>Gross Profit TTM:</Typography>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography>
-                {convertToCurrency(company.GrossProfitTTM)}
-              </Typography>
-            </Grid>
-
-            <Grid item xs={12} sm={6}>
-              <Typography>EBITDA:</Typography>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography>{convertToCurrency(company.EBITDA)}</Typography>
-            </Grid>
-
-            <Grid item xs={12} sm={6}>
-              <Typography>PE Ratio:</Typography>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography>{company.PERatio}</Typography>
-            </Grid>
-
-            <Grid item xs={12} sm={6}>
-              <Typography>Divident Yield (%):</Typography>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography>{company.DividendYield}</Typography>
-            </Grid>
-
-            <Grid item xs={12} sm={6}>
-              <Typography>Book Value:</Typography>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography>{company.BookValue}</Typography>
-            </Grid>
-          </Grid>
-        </div>
+        <Stats company={company}></Stats>        
       </div>
       <div class="mainContainer">
         <div class="container2" id="container">
