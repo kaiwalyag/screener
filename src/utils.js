@@ -1,14 +1,4 @@
-const someCommonValues = ['common', 'values'];
-
-export const doSomethingWithInput = (theInput) => {
-   //Do something with the input
-   return theInput;
-};
-
-export const justAnAlert = () => {
-   alert('hello');
-};
-
+export const wallmineChartUri = 'https://wallmine.com/widgets/chart/NASDAQ:AAPL';
 
 export const company = {
     Symbol: "IBM",

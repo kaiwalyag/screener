@@ -7,13 +7,14 @@ import {
   Divider,
 } from "@mui/material";
 
+import Grid from "@mui/material/Grid";
 import Navbar from "./components/layout/navbar";
 import { styled, createTheme, ThemeProvider } from "@mui/system";
 import CompanyName from "./components/CompanyName";
 import Stats from "./components/Stats";
 import MoreStats from "./components/MoreStats";
 import SalesChart from "./components/SalesChart";
-import {company} from './utils.js';
+import {wallmineChartUri, company} from './utils.js';
 
 const theme = createTheme({
   palette: {
@@ -41,13 +42,22 @@ function App() {
       
       <CssBaseline />      
       <Divider />
-      
-      <Stats company={company}></Stats>              
+      <Grid
+        container
+        spacing={{ xs: 2, md: 2, md: 2, lg:2  }}
+        columns={{ xs: 4, sm: 6, md: 6, lg:6 }}        
+      >
+        <Grid item xs={2} md={3}>
+          <Stats company={company}></Stats>
+        </Grid>
+        <Grid item xs={2} md={3}>
+          <iframe src={wallmineChartUri} async frameBorder='0' allowtransparency='true' scrolling='no' style={{width:'100%', height :'300px', paddingTop:'1rem'}}></iframe>    
+        </Grid>
+      </Grid>
 
       <MoreStats></MoreStats>
-      <Divider />
-      
-      <SalesChart></SalesChart>      
+      <Divider />    
+      <SalesChart></SalesChart>
     </Container>
   );
 }
