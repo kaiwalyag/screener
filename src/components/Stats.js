@@ -57,20 +57,8 @@ export default function Stats(props) {
         </Grid>
         <Grid item xs={2}>
           <StatsCard
-            title={"PE Ratio"}
-            value={convertToCurrency(props.company.PERatio)}
-          />
-        </Grid>
-        <Grid item xs={2}>
-          <StatsCard
             title={"Price To Book Ratio"}
             value={convertToCurrency(props.company.PriceToBookRatio)}
-          />
-        </Grid>
-        <Grid item xs={2}>
-          <StatsCard
-            title={"EBITDA"}
-            value={convertToCurrency(props.company.EBITDA)}
           />
         </Grid>
         <Grid item xs={2}>

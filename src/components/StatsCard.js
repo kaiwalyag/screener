@@ -16,7 +16,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const Value = styled(Typography)(({ theme }) => ({
   fontSize: "24px",
-  fontWeight: "500",
+  fontWeight: "400",
 }));
 
 const Change = styled(Typography)(({ theme }) => ({
