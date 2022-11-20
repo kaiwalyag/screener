@@ -14,6 +14,7 @@ import CompanyName from "./components/CompanyName";
 import Stats from "./components/Stats";
 import MoreStats from "./components/MoreStats";
 import SalesChart from "./components/SalesChart";
+import StockSearch from "./components/StockSearch";
 import {wallmineChartUri, company} from './utils.js';
 
 const theme = createTheme({
@@ -39,7 +40,7 @@ function App() {
       <Navbar></Navbar>
 
       <CompanyName></CompanyName>
-      
+      <StockSearch></StockSearch>
       <CssBaseline />      
       <Divider />
       <Grid
