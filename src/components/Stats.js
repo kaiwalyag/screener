@@ -2,6 +2,11 @@ import * as React from "react";
 import Grid from "@mui/material/Grid";
 import StatsCard from "./StatsCard";
 
+import { useRecoilValue } from "recoil";
+import { company as companyState } from "../states";
+
+
+
 const StatsBoxStyle = {
   marginTop: "10px",
 };
@@ -19,8 +24,11 @@ function convertToCurrency(labelValue) {
     : Math.abs(Number(labelValue));
 }
 
-export default function Stats(props) {
-  return (
+export default function Stats() {
+
+  const company = useRecoilValue(companyState);
+  
+  return JSON.stringify(company) != "{}" ? (
     <div>
       <Grid
         container
@@ -31,43 +39,45 @@ export default function Stats(props) {
         <Grid item xs={2}>
           <StatsCard
             title={"Market Cap"}
-            value={convertToCurrency(props.company.MarketCapitalization)}
-            change={props.company.QuarterlyRevenueGrowthYOY}
+            value={convertToCurrency(company.MarketCapitalization)}
+            change={company.QuarterlyRevenueGrowthYOY}
           />
         </Grid>
         <Grid item xs={2}>
           <StatsCard
             title={"Revenue"}
-            value={convertToCurrency(props.company.RevenueTTM)}
-            change={props.company.QuarterlyRevenueGrowthYOY}
+            value={convertToCurrency(company.RevenueTTM)}
+            change={company.QuarterlyRevenueGrowthYOY}
           />
         </Grid>
         <Grid item xs={2}>
           <StatsCard
             title={"Gross Profit (TTM)"}
-            value={convertToCurrency(props.company.GrossProfitTTM)}
-            change={props.company.QuarterlyEarningsGrowthYOY}
+            value={convertToCurrency(company.GrossProfitTTM)}
+            change={company.QuarterlyEarningsGrowthYOY}
           />
         </Grid>
         <Grid item xs={2}>
           <StatsCard
             title={"EBITDA"}
-            value={convertToCurrency(props.company.EBITDA)}
+            value={convertToCurrency(company.EBITDA)}
           />
         </Grid>
         <Grid item xs={2}>
           <StatsCard
             title={"Price To Book Ratio"}
-            value={convertToCurrency(props.company.PriceToBookRatio)}
+            value={convertToCurrency(company.PriceToBookRatio)}
           />
         </Grid>
         <Grid item xs={2}>
           <StatsCard
             title={"Return On Equity"}
-            value={convertToCurrency(props.company.ReturnOnEquityTTM)}
+            value={convertToCurrency(company.ReturnOnEquityTTM)}
           />
         </Grid>
       </Grid>
     </div>
+  ) : (
+    <span>Nothing to display</span>
   );
 }

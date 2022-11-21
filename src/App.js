@@ -54,20 +54,13 @@ function App() {
             <Stats company={company}></Stats>
           </Grid>
           <Grid item xs={2} md={3}>
-            <iframe
-              src={wallmineChartUri}
-              async
-              frameBorder="0"
-              allowtransparency="true"
-              scrolling="no"
-              style={{ width: "100%", height: "300px", paddingTop: "1rem" }}
-            ></iframe>
+            <SalesChart></SalesChart>
           </Grid>
         </Grid>
 
         <MoreStats></MoreStats>
         <Divider />
-        <SalesChart></SalesChart>
+        
       </Container>
     </RecoilRoot>
   );
