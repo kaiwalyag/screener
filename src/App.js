@@ -18,7 +18,7 @@ import CompanyName from "./components/CompanyName";
 import Stats from "./components/Stats";
 import MoreStats from "./components/MoreStats";
 import SalesChart from "./components/SalesChart";
-import { wallmineChartUri, company } from "./utils.js";
+
 
 const theme = createTheme({
   palette: {
@@ -47,13 +47,17 @@ function App() {
         <Divider />
         <Grid
           container
-          spacing={{ xs: 2, md: 2, md: 2, lg: 2 }}
-          columns={{ xs: 4, sm: 6, md: 6, lg: 6 }}
+          spacing={1}
+          columns={{ xs: 4, sm: 6, md: 6, lg: 6 }}          
         >
-          <Grid item xs={2} md={3}>
-            <Stats company={company}></Stats>
+          <Grid item xs={2} md={2}>
+            <Stats></Stats>
           </Grid>
-          <Grid item xs={2} md={3}>
+          <Grid item xs={2} md={2}>
+            <Stats></Stats>
+          </Grid>
+          <Grid item xs={2} md={2}>
+            <SalesChart></SalesChart>
             <SalesChart></SalesChart>
           </Grid>
         </Grid>

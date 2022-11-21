@@ -5,11 +5,19 @@ import StatsCard from "./StatsCard";
 import { useRecoilValue } from "recoil";
 import { company as companyState } from "../states";
 
-
+import { styled, alpha } from "@mui/material/styles";
 
 const StatsBoxStyle = {
-  marginTop: "10px",
+  marginTop: "10px"
 };
+
+const StatsCardStyle = styled(StatsCard)(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  position: "absolute",
+  pointerEvents: "none",
+  alignItems: "center",
+  justifyContent: "center"  
+}));
 
 function convertToCurrency(labelValue) {
   // Nine Zeroes for Billions
@@ -32,12 +40,12 @@ export default function Stats() {
     <div>
       <Grid
         container
-        spacing={{ xs: 2, md: 2, md: 2, lg: 2 }}
-        columns={{ xs: 4, sm: 6, md: 6, lg: 6 }}
+        spacing={1}
+        columns={4}
         style={StatsBoxStyle}
       >
         <Grid item xs={2}>
-          <StatsCard
+          <StatsCardStyle
             title={"Market Cap"}
             value={convertToCurrency(company.MarketCapitalization)}
             change={company.QuarterlyRevenueGrowthYOY}
@@ -63,7 +71,15 @@ export default function Stats() {
             value={convertToCurrency(company.EBITDA)}
           />
         </Grid>
-        <Grid item xs={2}>
+      </Grid>
+      <Grid
+        container
+        spacing={1}
+        columns={4}
+        style={StatsBoxStyle}
+      >
+
+      <Grid item xs={2}>
           <StatsCard
             title={"Price To Book Ratio"}
             value={convertToCurrency(company.PriceToBookRatio)}

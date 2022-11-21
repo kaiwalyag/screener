@@ -9,24 +9,26 @@ const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
   padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-  width: "170px",
+  color: theme.palette.text.secondary  
 }));
 
 const Value = styled(Typography)(({ theme }) => ({
-  fontSize: "24px",
+  fontSize: "1.5rem",
+  fontWeight: "400",
+}));
+
+const Key = styled(Typography)(({ theme }) => ({
+  fontSize: "0.8rem",
   fontWeight: "400",
 }));
 
 const Change = styled(Typography)(({ theme }) => ({
-  fontSize: "12px",
+  fontSize: "0.8rem",
   color: "green",
 }));
 
 const ChangeDivStyle = {
   display: "flex",
-  justifyContent: "center",
   alignItems: "center",
   flexWrap: "wrap",
 };
@@ -35,7 +37,7 @@ export default function StatsCard(props) {
   return (
     <div>
       <Item>
-        <Typography color="text.secondary">{props.title}</Typography>
+        <Key>{props.title}</Key>
         <Value> {props.value}</Value>
         <div style={ChangeDivStyle}>
           <KeyboardArrowUp sx={{ color: "green" }} />
