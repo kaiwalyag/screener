@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import StatsCard from "./StatsCard";
 
 const StatsBoxStyle = {
-  marginTop: '10px'  
+  marginTop: "10px",
 };
 
 function convertToCurrency(labelValue) {
@@ -24,8 +24,8 @@ export default function Stats(props) {
     <div>
       <Grid
         container
-        spacing={{ xs: 2, md: 2, md: 2, lg:2  }}
-        columns={{ xs: 4, sm: 6, md: 6, lg:6 }}
+        spacing={{ xs: 2, md: 2, md: 2, lg: 2 }}
+        columns={{ xs: 4, sm: 6, md: 6, lg: 6 }}
         style={StatsBoxStyle}
       >
         <Grid item xs={2}>

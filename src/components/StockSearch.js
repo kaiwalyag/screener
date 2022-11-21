@@ -1,59 +1,62 @@
 import React, { useEffect, useState } from "react";
-
 import { AutoComplete } from "antd";
-import axios from "axios";
-// import "./index.css";
-// import "antd/dist/antd.css";
-// import "./App.css";
-// import "./styles.css";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { ticker as tickerState, company as companyState } from "../states";
+
+import { searchTickers, getTickerDetails } from "../services/tickerService";
 
 export default function StockSearch(props) {
-
   const [search, setSearch] = useState("");
   const [dataSource, setDataSource] = useState([]);
 
-    const clearState = () => {
-      setDataSource([]);
-    };
-    const getTickerFromAPi = async e => {
-      const response = await axios.get(
-        `https://ticker-2e1ica8b9.now.sh/keyword/${e}`
-      );
-      const ArraysofData = response.data.map(f => [f.symbol + " ," + f.name]);
+  const [ticker, setTicker] = useRecoilState(tickerState);
+  const [company, setCompany] = useRecoilState(companyState);
+
+  const fetchDetails = async (e) => {
+    let ticker = e.split(",")[0].trim();
+    setTicker(ticker);
+    setDataSource([]);
+
+    getTickerDetails(ticker).then((res) => {
+      console.log("response from getTickerDetails" + JSON.stringify(res));
+
+      setCompany(res);
+    });
+  };
+
+  const getTickerFromAPi = async (e) => {
+    await searchTickers(e).then((res) => {
+      const ArraysofData = res.map((f) => [f.symbol + " ," + f.name]);
       const FlatArray = [].concat(...ArraysofData);
 
       setDataSource(FlatArray);
-    };
+    });
+  };
 
-    useEffect(() => {
-      if (search != "" ) {
-        getTickerFromAPi(search);
-      }
+  useEffect(() => {
+    if (search != "") {
+      getTickerFromAPi(search);
+    }
+  }, [search]);
 
-   }, [search]);
-   
+  const handleSearch = (e) => {
+    if (e) {
+      setSearch(e);
+    } else {
+      setSearch(e);
+    }
+  };
 
-    const handleSearch = e => {
-      if (e) {
-        setSearch(e) ;
-      } else {
-        setSearch(e);
-      }
-    };
-
-    return (
-      <div style={{ padding: "10%", marginLeft: "5%" }}>
-        <h2>Auto Complete Search end point for Stock market symbols,names</h2>
-        <AutoComplete
-          style={{ width: "90%" }}
-          className="d"
-          value={search}
-          onChange={e => handleSearch(e)}
-          onSelect={clearState}
-          dataSource={dataSource}
-          placeholder="search Ticker"
-        />        
-      </div>
-    );
-  
+  return (
+    <div style={{ padding: "1%" }}>
+      <AutoComplete
+        style={{ width: "400px" }}
+        value={search}
+        onChange={(e) => handleSearch(e)}
+        onSelect={(e) => fetchDetails(e)}
+        dataSource={dataSource}
+        placeholder="search Ticker"
+      />
+    </div>
+  );
 }

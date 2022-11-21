@@ -25,7 +25,6 @@ ChartJS.register(
   Legend
 );
 
-
 const options = {
   type: "line",
   showScale: false,
@@ -40,34 +39,34 @@ const options = {
         data: ["5000", "8000", "10000", "14000", "17000"],
         borderColor: "rgb(75, 192, 192)",
         tension: 0.1,
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
-        stack: 'Stack 0',
-        barThickness:20
-      }      
-    ]
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        stack: "Stack 0",
+        barThickness: 20,
+      },
+    ],
   },
-    scales: {
-        x: {
-          grid: {
-            display: false
-          }
-        },
-        y: {
-          grid: {
-            display: false
-          }
-        }
-      }
+  scales: {
+    x: {
+      grid: {
+        display: false,
+      },
+    },
+    y: {
+      grid: {
+        display: false,
+      },
+    },
+  },
 };
 
 export default function SalesChart() {
   return (
     <Box
       sx={{
-        width: 300,              
+        width: 300,
       }}
     >
-        <Bar options={options} data={options.data} />
-   </Box>
+      <Bar options={options} data={options.data} />
+    </Box>
   );
 }
