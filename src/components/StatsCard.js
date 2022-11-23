@@ -9,7 +9,7 @@ const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
   padding: theme.spacing(1),
-  color: theme.palette.text.secondary  
+  color: theme.palette.text.secondary,
 }));
 
 const Value = styled(Typography)(({ theme }) => ({
@@ -39,10 +39,12 @@ export default function StatsCard(props) {
       <Item>
         <Key>{props.title}</Key>
         <Value> {props.value}</Value>
-        <div style={ChangeDivStyle}>
-          <KeyboardArrowUp sx={{ color: "green" }} />
-          <Change>10.23% </Change>
-        </div>
+        {props.showChange && (
+          <div style={ChangeDivStyle}>
+            <KeyboardArrowUp sx={{ color: "green" }} />
+            <Change>10.23% </Change>
+          </div>
+        )}
       </Item>
     </div>
   );
