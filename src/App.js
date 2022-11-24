@@ -16,6 +16,7 @@ import Navbar from "./components/layout/navbar";
 import { styled, createTheme, ThemeProvider } from "@mui/system";
 import CompanyName from "./components/CompanyName";
 import Stats from "./components/Stats";
+import Ratios from "./components/Ratios";
 import MoreStats from "./components/MoreStats";
 import SalesChart from "./components/SalesChart";
 import BalanceSheetChart from "./components/BalanceSheetChart";
@@ -45,19 +46,24 @@ function App() {
         <Navbar></Navbar>
         <CompanyName></CompanyName>
         <CssBaseline />
-        <Divider />
-        <Grid container spacing={1} columns={{ xs: 4, sm: 6, md: 6, lg: 6 }}>
-          <Grid item xs={2} md={2}>
+        <Divider variant="middle"/>
+        <Grid container spacing={1} columns={12}>
+          <Grid item xs={12} sm={12} md={6} lg={4}>
             <Stats></Stats>
           </Grid>
-          <Grid item xs={2} md={2}>
-            
+          <Grid item xs={12} sm={12} md={6} lg={4}>
             <BalanceSheetChart />
+          </Grid>
+          <Grid item xs={12} sm={12} md={6} lg={4}>
+            <Ratios />
           </Grid>
         </Grid>
 
-        <MoreStats></MoreStats>
-        <Divider />
+        <Grid container spacing={1} columns={12}>
+          <Grid item>
+            <MoreStats></MoreStats>
+          </Grid>
+        </Grid>                
       </Container>
     </RecoilRoot>
   );

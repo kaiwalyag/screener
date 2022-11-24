@@ -36,49 +36,45 @@ const data = {
     {
       label: 'Dataset 1',
       data: [200, 300],
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
+      backgroundColor: "#95BF8F",
     },
     {
       label: 'Dataset 2',
-      data: [50,20],
-      backgroundColor: "rgba(255, 99, 132, 1)",
+      data: [200,150],
+      backgroundColor: "#5A8E52",
     },
     {
       label: 'Dataset 3',
-      data: [30,60],
-      backgroundColor: "rgba(255, 99, 2, 0.5)",
-    },
+      data: [100,50],
+      backgroundColor: "#314E2D",
+    }
   ]
 };
 
-
-const config = {
-  type: 'bar',
-  data: data,
-  options: {
-    plugins: {
-      title: {
-        display: true,
-        text: 'Chart.js Bar Chart - Stacked'
-      },
+export const options = {
+  plugins: {
+    title: {
+      display: true,
+      text: 'Chart.js Bar Chart - Stacked',
     },
-    responsive: true,
-    scales: {
-      x: {
-        stacked: true,
-      },
-      y: {
-        stacked: true
-      }
-    }
-  }
+  },
+  responsive: true,
+  scales: {
+    x: {
+      stacked: true,
+    },
+    y: {
+      stacked: true,
+    },
+  },
 };
+
 export default function BalanceSheetChart() {
   const balanceSheet = useRecoilValue(balanceSheetState);
   const latest = balanceSheet.annualReports[0];
   return (
     <Box>
-      <Bar options={config} data={data} />      
+      <Bar options={options} data={data} />      
     </Box>
   );
 }
