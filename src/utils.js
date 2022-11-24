@@ -59,3 +59,5 @@ export const convertToCurrency = (labelValue) => {
     ? (Math.abs(Number(labelValue)) / 1.0e3).toFixed(2) + " K"
     : Math.abs(Number(labelValue));
 };
+
+

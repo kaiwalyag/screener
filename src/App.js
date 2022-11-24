@@ -18,6 +18,8 @@ import CompanyName from "./components/CompanyName";
 import Stats from "./components/Stats";
 import MoreStats from "./components/MoreStats";
 import SalesChart from "./components/SalesChart";
+import BalanceSheetChart from "./components/BalanceSheetChart";
+
 
 const theme = createTheme({
   palette: {
@@ -49,8 +51,8 @@ function App() {
             <Stats></Stats>
           </Grid>
           <Grid item xs={2} md={2}>
-            <SalesChart></SalesChart>
-            <SalesChart></SalesChart>
+            
+            <BalanceSheetChart />
           </Grid>
         </Grid>
 
