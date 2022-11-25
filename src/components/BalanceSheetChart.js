@@ -88,16 +88,18 @@ export const options = {
   },
 };
 
-// ticks: {
-//   display: false,
-// }
+let libOptions = JSON.parse(JSON.stringify(options));
+libOptions.scales.y.ticks = {
+  display: false
+};
 
 export default function BalanceSheetChart() {
 
   const balanceSheet = useRecoilValue(balanceSheetState);
   const latest = balanceSheet.annualReports[0];
 
-  const dataset = [];
+  const assetsDataset = [];
+  const liabilitiesDataset = [];
   
   const assets = (({ totalCurrentAssets , intangibleAssets, investments, otherCurrentAssets }) => 
     ({ totalCurrentAssets , intangibleAssets, investments, otherCurrentAssets }))(latest);
@@ -106,7 +108,7 @@ export default function BalanceSheetChart() {
   const liabilities = (({ totalCurrentLiabilities , longTermDebt, totalShareholderEquity, otherCurrentLiabilities }) => 
     ({ totalCurrentLiabilities , longTermDebt, totalShareholderEquity, otherCurrentLiabilities }))(latest);
 
-  Object.keys(assets).forEach((e,i) => dataset.push(
+  Object.keys(assets).forEach((e,i) => assetsDataset.push(
     {
       label: toSentenceCase(e),
       data: [convertMillions(assets[e])],
@@ -114,11 +116,22 @@ export default function BalanceSheetChart() {
     }
   ));
 
-  console.log(dataset);
+  Object.keys(liabilities).forEach((e,i) => liabilitiesDataset.push(
+    {
+      label: toSentenceCase(e),
+      data: [convertMillions(liabilities[e])],
+      backgroundColor: liabilitiesColors[i]
+    }
+  ));
 
-  const data = {
+  const assetsData = {
     labels: ['Assets'],
-    datasets: dataset    
+    datasets: assetsDataset    
+  };
+
+  const liabilitiesData = {
+    labels: ['Liabilities'],
+    datasets: liabilitiesDataset    
   };
 
   return (
@@ -130,10 +143,10 @@ export default function BalanceSheetChart() {
         <Content>
       <Grid container spacing={2} columns={16} sx={{height:'21rem'}}>
         <Grid item xs={8}>
-          <Bar options={options} data={data} />
+          <Bar options={options} data={assetsData} />
         </Grid>
         <Grid item xs={8}>
-          <Bar options={options} data={data} />
+          <Bar options={libOptions} data={liabilitiesData} />
         </Grid>
     </Grid>
 
