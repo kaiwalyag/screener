@@ -58,23 +58,33 @@ let defaultBalanceSheet =  {
       {
           "fiscalDateEnding": "2021-12-31",
           "reportedCurrency": "USD",
+          
           "totalAssets": "132001000000",
-          "totalCurrentAssets": "29539000000",
+
+          "totalCurrentAssets": "29539000000",          
           "cashAndCashEquivalentsAtCarryingValue": "6650000000",
           "cashAndShortTermInvestments": "6650000000",
           "inventory": "1649000000",
           "currentNetReceivables": "14977000000",
           "totalNonCurrentAssets": "101786000000",
+          
           "propertyPlantEquipment": "5694000000",
           "accumulatedDepreciationAmortizationPPE": "14390000000",
+          
           "intangibleAssets": "68154000000",
           "intangibleAssetsExcludingGoodwill": "12511000000",
           "goodwill": "55643000000",
+          
           "investments": "199000000",
           "longTermInvestments": "159000000",
           "shortTermInvestments": "600000000",
+          
           "otherCurrentAssets": "5663000000",
+          
           "otherNonCurrentAssets": "None",
+
+
+
           "totalLiabilities": "113005000000",
           "totalCurrentLiabilities": "33619000000",
           "currentAccountsPayable": "3955000000",
