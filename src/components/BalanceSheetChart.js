@@ -2,7 +2,7 @@ import * as React from "react";
 import Grid from "@mui/material/Grid";
 import { useRecoilValue } from "recoil";
 import { convertMillions,toSentenceCase } from "../utils.js";
-import {Card, CardContent,CardHeader } from "@mui/material";
+import {Card, CardContent,CardHeader, Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 import {
@@ -44,6 +44,11 @@ const Content = styled(CardContent)(({ theme }) => ({
 const TitleStyles = {
   fontSize: "0.7rem",
    color:"orange" 
+}
+
+const subTitleStyles = {
+  fontSize: "0.6rem",
+   color:"grey" 
 }
 
 
@@ -101,8 +106,8 @@ export default function BalanceSheetChart() {
   const assetsDataset = [];
   const liabilitiesDataset = [];
   
-  const assets = (({ totalCurrentAssets , intangibleAssets, investments, otherCurrentAssets }) => 
-    ({ totalCurrentAssets , intangibleAssets, investments, otherCurrentAssets }))(latest);
+  const assets = (({ totalCurrentAssets , intangibleAssets, investments, otherCurrentAssets,propertyPlantEquipment }) => 
+    ({ totalCurrentAssets , intangibleAssets, investments, otherCurrentAssets,propertyPlantEquipment }))(latest);
 
 
   const liabilities = (({ totalCurrentLiabilities , longTermDebt, totalShareholderEquity, otherCurrentLiabilities }) => 
@@ -134,19 +139,32 @@ export default function BalanceSheetChart() {
     datasets: liabilitiesDataset    
   };
 
+  const getAssetsChartHeight = (val) => {    
+    return val * 100 / convertMillions(latest.totalAssets);
+  };
+
   return (
     <Card variant="outlined" raised="true">
         <Header
           title="BALANCE SHEET"
           titleTypographyProps={TitleStyles}
+          subheader="As of Date, $million"
+          subheaderTypographyProps={subTitleStyles}
         ></Header>
         <Content>
-      <Grid container spacing={2} columns={16} sx={{height:'21rem'}}>
+      <Grid container spacing={2} columns={16} sx={{height:'21rem'}} display="false">
         <Grid item xs={8}>
           <Bar options={options} data={assetsData} />
         </Grid>
         <Grid item xs={8}>
-          <Bar options={libOptions} data={liabilitiesData} />
+        <Grid container spacing={1}>
+            {assetsDataset.map((itemp, index) => (
+              <Grid key={index} sx={{backgroundColor:liabilitiesColors[index], padding:'5px', fontSize: "0.7rem", width: '100px', height: getAssetsChartHeight(itemp.data) + 'px'}}>
+                { getAssetsChartHeight(itemp.data) > 5 ? itemp.data : '' }
+              </Grid>
+            ))}
+        
+          </Grid>
         </Grid>
     </Grid>
 
