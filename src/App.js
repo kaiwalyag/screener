@@ -21,7 +21,6 @@ import MoreStats from "./components/MoreStats";
 import SalesChart from "./components/SalesChart";
 import BalanceSheetChart from "./components/BalanceSheetChart";
 
-
 const theme = createTheme({
   palette: {
     primary: {
@@ -45,8 +44,6 @@ function App() {
       <Container component="main">
         <Navbar></Navbar>
         <CompanyName></CompanyName>
-        <CssBaseline />
-        <Divider variant="middle"/>
         <Grid container spacing={1} columns={12}>
           <Grid item xs={12} sm={12} md={6} lg={4}>
             <Stats></Stats>
@@ -63,7 +60,7 @@ function App() {
           <Grid item>
             <MoreStats></MoreStats>
           </Grid>
-        </Grid>                
+        </Grid>
       </Container>
     </RecoilRoot>
   );

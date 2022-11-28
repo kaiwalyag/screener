@@ -50,30 +50,30 @@ export const company = {
 export const convertToCurrency = (labelValue) => {
   // Nine Zeroes for Billions
   return Math.abs(Number(labelValue)) >= 1.0e9
-    ? (Math.abs(Number(labelValue)) / 1.0e9).toFixed(2) + " B"
+    ? (Math.abs(Number(labelValue)) / 1.0e9).toFixed(1) + " Bn"
     : // Six Zeroes for Millions
     Math.abs(Number(labelValue)) >= 1.0e6
-    ? (Math.abs(Number(labelValue)) / 1.0e6).toFixed(2) + " M"
+    ? (Math.abs(Number(labelValue)) / 1.0e6).toFixed(1) + " Mn"
     : // Three Zeroes for Thousands
     Math.abs(Number(labelValue)) >= 1.0e3
-    ? (Math.abs(Number(labelValue)) / 1.0e3).toFixed(2) + " K"
+    ? (Math.abs(Number(labelValue)) / 1.0e3).toFixed(1) + " K"
     : Math.abs(Number(labelValue));
 };
 
 export const convertMillions = (labelValue) => {
   // Nine Zeroes for Billions
   return Math.abs(Number(labelValue)) >= 1.0e9
-    ? (Math.abs(Number(labelValue)) / 1.0e9).toFixed(2)
+    ? (Math.abs(Number(labelValue)) / 1.0e9).toFixed(1)
     : // Six Zeroes for Millions
     Math.abs(Number(labelValue)) >= 1.0e6
-    ? (Math.abs(Number(labelValue)) / 1.0e6).toFixed(2)
+    ? (Math.abs(Number(labelValue)) / 1.0e6).toFixed(1)
     : Math.abs(Number(labelValue));
 };
 
-export const toSentenceCase = camelCase => {
+export const toSentenceCase = (camelCase) => {
   if (camelCase) {
-      const result = camelCase.replace(/([A-Z])/g, ' $1');
-      return result[0].toUpperCase() + result.substring(1).toLowerCase();
+    const result = camelCase.replace(/([A-Z])/g, " $1");
+    return result[0].toUpperCase() + result.substring(1).toLowerCase();
   }
-  return '';
+  return "";
 };

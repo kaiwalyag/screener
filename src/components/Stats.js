@@ -1,11 +1,12 @@
 import * as React from "react";
 import Grid from "@mui/material/Grid";
 import StatsCard from "./StatsCard";
-import {Card, CardContent,CardHeader } from "@mui/material";
+import { Card, CardContent, CardHeader } from "@mui/material";
 
 import { useRecoilValue } from "recoil";
 import { company as companyState } from "../states";
 import { styled, alpha } from "@mui/material/styles";
+import { convertToCurrency, company } from "../utils.js";
 
 const StatsBoxStyle = {
   marginTop: "10px",
@@ -21,7 +22,7 @@ const StatsCardStyle = styled(StatsCard)(({ theme }) => ({
 
 const Header = styled(CardHeader)(({ theme }) => ({
   padding: "5px",
-  paddingBottom: "0"  
+  paddingBottom: "0",
 }));
 
 const Content = styled(CardContent)(({ theme }) => ({
@@ -32,21 +33,8 @@ const Content = styled(CardContent)(({ theme }) => ({
 
 const TitleStyles = {
   fontSize: "0.7rem",
-   color:"orange" 
-}
-
-function convertToCurrency(labelValue) {
-  // Nine Zeroes for Billions
-  return Math.abs(Number(labelValue)) >= 1.0e9
-    ? (Math.abs(Number(labelValue)) / 1.0e9).toFixed(2) + " B"
-    : // Six Zeroes for Millions
-    Math.abs(Number(labelValue)) >= 1.0e6
-    ? (Math.abs(Number(labelValue)) / 1.0e6).toFixed(2) + " M"
-    : // Three Zeroes for Thousands
-    Math.abs(Number(labelValue)) >= 1.0e3
-    ? (Math.abs(Number(labelValue)) / 1.0e3).toFixed(2) + " K"
-    : Math.abs(Number(labelValue));
-}
+  color: "orange",
+};
 
 export default function Stats() {
   const company = useRecoilValue(companyState);
@@ -54,10 +42,7 @@ export default function Stats() {
   return JSON.stringify(company) != "{}" ? (
     <div>
       <Card variant="outlined" raised="true">
-        <Header
-          title="OVERVIEW"
-          titleTypographyProps={TitleStyles}
-        ></Header>
+        <Header title="OVERVIEW" titleTypographyProps={TitleStyles}></Header>
         <Content>
           <Grid container spacing={1} columns={4} style={StatsBoxStyle}>
             <Grid item xs={2}>
@@ -108,7 +93,7 @@ export default function Stats() {
             </Grid>
           </Grid>
         </Content>
-      </Card>      
+      </Card>
     </div>
   ) : (
     <span>Nothing to display</span>
