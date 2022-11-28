@@ -22,3 +22,14 @@ code {
 .stockName {
   font-weight: 700;
 }
+
+.lables {
+  display: inline-block;
+  position: relative;
+  right: 155px;
+  top: -1rem;
+  color: brown;
+  font-size: 0.8rem;
+  width: 150px;
+  text-align: right;
+}

@@ -1,7 +1,9 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 import { useRecoilValue } from "recoil";
-//import { actions } from "../utils.js";
+import { convertMillions,toSentenceCase } from "../utils.js";
+import {Card, CardContent,CardHeader, Box } from "@mui/material";
+import { styled } from "@mui/material/styles";
 
 import {
   Chart as ChartJS,
@@ -29,52 +31,155 @@ ChartJS.register(
   Legend
 );
 
+const Header = styled(CardHeader)(({ theme }) => ({
+  padding: "5px",
+}));
 
-const data = {
-  labels: ['Assets', 'Liabilities'],
-  datasets: [
-    {
-      label: 'Dataset 1',
-      data: [200, 300],
-      backgroundColor: "#95BF8F",
-    },
-    {
-      label: 'Dataset 2',
-      data: [200,150],
-      backgroundColor: "#5A8E52",
-    },
-    {
-      label: 'Dataset 3',
-      data: [100,50],
-      backgroundColor: "#314E2D",
-    }
-  ]
-};
+const Content = styled(CardContent)(({ theme }) => ({
+  paddingTop: "0",
+  paddingBottom: "0",
+  margin: "0",
+}));
+
+const TitleStyles = {
+  fontSize: "0.7rem",
+   color:"orange" 
+}
+
+const subTitleStyles = {
+  fontSize: "0.6rem",
+   color:"grey" 
+}
+
+
+const assetColors = [  
+  '#0A758F',
+  '#0D98BA',
+  '#10BBE5',
+  '#32CBF1',
+  '#5DD6F4'
+]
+
+
+const liabilitiesColors = [  
+  '#7d3c34',
+  '#984940',
+  '#b4564b',
+  '#bf7067',
+  '#d7a49e'
+]
 
 export const options = {
   plugins: {
     title: {
-      display: true,
-      text: 'Chart.js Bar Chart - Stacked',
+      display: false
     },
+    legend: {
+      display: false   
+    }    
   },
   responsive: true,
+  maintainAspectRatio: false,
   scales: {
     x: {
-      stacked: true,
+      stacked: true
     },
     y: {
       stacked: true,
+      grid: {
+        display: false
+      }
     },
   },
 };
 
+let libOptions = JSON.parse(JSON.stringify(options));
+libOptions.scales.y.ticks = {
+  display: false
+};
+
 export default function BalanceSheetChart() {
+
   const balanceSheet = useRecoilValue(balanceSheetState);
   const latest = balanceSheet.annualReports[0];
+
+  const assetsDataset = [];
+  const liabilitiesDataset = [];
+  
+  const assets = (({ totalCurrentAssets , intangibleAssets, investments, otherCurrentAssets,propertyPlantEquipment }) => 
+    ({ totalCurrentAssets , intangibleAssets, investments, otherCurrentAssets,propertyPlantEquipment }))(latest);
+
+
+  const liabilities = (({ totalCurrentLiabilities , longTermDebt, totalShareholderEquity, otherCurrentLiabilities }) => 
+    ({ totalCurrentLiabilities , longTermDebt, totalShareholderEquity, otherCurrentLiabilities }))(latest);
+
+  Object.keys(assets).forEach((e,i) => assetsDataset.push(
+    {
+      label: toSentenceCase(e),
+      data: [convertMillions(assets[e])],
+      backgroundColor: assetColors[i]
+    }
+  ));
+
+  Object.keys(liabilities).forEach((e,i) => liabilitiesDataset.push(
+    {
+      label: toSentenceCase(e),
+      data: [convertMillions(liabilities[e])],
+      backgroundColor: liabilitiesColors[i]
+    }
+  ));
+
+  const assetsData = {
+    labels: ['Assets'],
+    datasets: assetsDataset    
+  };
+
+  const liabilitiesData = {
+    labels: ['Liabilities'],
+    datasets: liabilitiesDataset    
+  };
+
+  const getAssetsChartHeight = (val) => {    
+    return val * 100 / convertMillions(latest.totalAssets);
+  };
+
+  const graphItemStyle = (item,idx) => {    
+    return  {
+    backgroundColor:liabilitiesColors[idx],
+    height: getAssetsChartHeight(item.data) + 'px',
+    fontSize: "1rem",
+    color:'#E2DFD2',
+    width: '100px',
+    textAlign:"center",
+    borderBottom:'1px solid #EDEADE'
+    }
+  };
+
   return (
-    <Box>
-      <Bar options={options} data={data} />      
-    </Box>
+    <Card variant="outlined" raised="true">
+        <Header
+          title="BALANCE SHEET"
+          titleTypographyProps={TitleStyles}
+          subheader="As of Date, $million"
+          subheaderTypographyProps={subTitleStyles}
+        ></Header>
+        <Content>
+      <Grid container spacing={2} columns={16} sx={{height:'21rem'}} display="false">
+        <Grid item xs={8}>
+        </Grid>
+        <Grid item xs={8}>
+        <Grid container spacing={1}>
+            {assetsDataset.map((item, index) => (
+              <Grid key={index} sx={graphItemStyle(item, index)}>
+                <span>{ getAssetsChartHeight(item.data) > 5 ? item.data : '' }</span>
+                <span className="lables">{ getAssetsChartHeight(item.data) > 5 ? item.label : '' }</span>
+              </Grid>
+            ))}        
+          </Grid>
+        </Grid>
+    </Grid>
+
+    </Content>
+      </Card>      
   );
 }
